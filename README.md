@@ -1,3 +1,23 @@
+# KCE Jenga Payment Gateway Package - Laravel Payment Processing for Kenya
+
+[![Latest Stable Version](https://img.shields.io/packagist/v/kce/kcejenga.svg)](https://packagist.org/packages/kce/kcejenga)
+[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/koech-connect/kcejenga/blob/main/LICENSE)
+[![Built with Laravel](https://img.shields.io/badge/built%20with-Laravel-brightgreen.svg)](https://laravel.com)
+
+## Overview
+
+**KCE Jenga Payment Gateway Package** is a premium, enterprise-grade Laravel payment processing solution developed by [Koech Connect Enterprise](https://koechconnect.com), a leading IT solutions provider in Kenya. This package provides seamless integration with multiple payment providers including **M-Pesa**, **Equity Bank**, **Mastercard**, and **Visa**, enabling Kenyan businesses to accept both local and international payments.
+
+### Why Choose KCE Jenga?
+
+- **Kenya-Focused**: Built specifically for Kenyan payment systems and business requirements
+- **DevSecOps Certified**: High-security payment processing with enterprise-grade encryption
+- **API Integration Experts**: Proven expertise integrating M-Pesa, Equity Bank, Mastercard, and Visa APIs
+- **Production Ready**: Used by enterprises across Kenya for critical payment operations
+- **Comprehensive Documentation**: Complete guides for Laravel developers in Kenya and beyond
+
+---
+
 # KCE Jenga Payment Gateway Package
 
 A Laravel package for integrating Jenga Payment Gateway into your Laravel applications. This package provides a clean, easy-to-use interface for processing payments through Jenga's payment gateway.
