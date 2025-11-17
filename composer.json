@@ -1,0 +1,47 @@
+{
+    "name": "kce/kcejenga",
+    "description": "Laravel package for Jenga Payment Gateway integration",
+    "type": "library",
+    "version": "1.0.0",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Koech Connect Enterprise",
+            "email": "info@kcenterprise.top"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^11.0|^12.0",
+        "illuminate/http": "^11.0|^12.0",
+        "illuminate/database": "^11.0|^12.0",
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.0|^10.0",
+        "phpunit/phpunit": "^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kce\\Kcejenga\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Kce\\Kcejenga\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Kce\\Kcejenga\\KcejengaServiceProvider"
+            ],
+            "aliases": {
+                "Kcejenga": "Kce\\Kcejenga\\Facades\\Kcejenga"
+            }
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
+
