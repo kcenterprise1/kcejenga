@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('order_status', 150)->nullable();
             $table->string('order_reference', 150)->nullable()->index();
             $table->string('transaction_reference', 150)->nullable()->index();
+            
+            // Unique constraint to prevent duplicate transactions
+            $table->unique(['order_reference', 'transaction_reference'], 'unique_jenga_transaction');
             $table->string('transaction_amount', 150)->nullable();
             $table->string('transaction_currency', 150)->nullable();
             $table->string('payment_channel', 150)->nullable();

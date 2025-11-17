@@ -23,8 +23,8 @@ class JengaPaymentService
     public function __construct()
     {
         $this->client = new Client([
-            'timeout' => 90,
-            'verify' => false, // SSL verification disabled as in original
+            'timeout' => config('kcejenga.timeout', 90),
+            'verify' => config('kcejenga.verify_ssl', env('APP_ENV') === 'production'),
         ]);
 
         $this->loadConfiguration();
@@ -83,7 +83,18 @@ class JengaPaymentService
                 ],
             ]);
 
-            $responseData = json_decode($response->getBody()->getContents(), true);
+            $responseBody = $response->getBody()->getContents();
+            
+            if (empty($responseBody)) {
+                throw new Exception('Empty response from Jenga API');
+            }
+            
+            $responseData = json_decode($responseBody, true);
+            
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                throw new Exception('Invalid JSON response: ' . json_last_error_msg());
+            }
+            
             $statusCode = $response->getStatusCode();
 
             if ($statusCode === 200 && isset($responseData['accessToken'])) {
@@ -190,6 +201,11 @@ class JengaPaymentService
             throw new Exception("productDescription must not exceed 200 characters");
         }
 
+        // Validate amount format
+        if (!is_numeric($paymentData['orderAmount']) || $paymentData['orderAmount'] <= 0) {
+            throw new Exception('orderAmount must be a positive number');
+        }
+
         // Get access token
         $token = $this->authenticate();
         if (empty($token)) {
@@ -237,7 +253,7 @@ class JengaPaymentService
             'customerFirstName' => $paymentData['customerFirstName'],
             'customerLastName' => $paymentData['customerLastName'],
             'customerEmail' => $paymentData['customerEmail'],
-            'customerPhone' => str_replace('+', '', $paymentData['customerPhone']),
+            'customerPhone' => preg_replace('/[^0-9]/', '', $paymentData['customerPhone']),
             'customerPostalCodeZip' => $paymentData['customerPostalCodeZip'] ?? '',
             'customerAddress' => $paymentData['customerAddress'] ?? '',
             'callbackUrl' => $callbackUrl,

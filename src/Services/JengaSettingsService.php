@@ -5,6 +5,7 @@ namespace Kce\Kcejenga\Services;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Log;
 use Exception;
 
 class JengaSettingsService
@@ -172,8 +173,13 @@ class JengaSettingsService
         }
 
         // Clear config cache if it exists
-        if (app()->configurationIsCached()) {
-            Artisan::call('config:clear');
+        try {
+            if (app()->configurationIsCached()) {
+                Artisan::call('config:clear');
+            }
+        } catch (\Exception $e) {
+            Log::warning('Failed to clear config cache: ' . $e->getMessage());
+            // Continue - config update still works
         }
 
         // Reload settings from updated config
